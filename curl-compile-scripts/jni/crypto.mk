@@ -1,7 +1,9 @@
 CRYPTO_COMMON_CFLAGS := \
   -DANDROID -DOPENSSL_NO_ASM -DOPENSSL_THREADS -D_REENTRANT \
   -DDSO_DLFCN -DHAVE_DLFCN_H -DOPENSSL_NO_CAST -DOPENSSL_NO_CAMELLIA \
-  -DOPENSSL_NO_IDEA -DOPENSSL_NO_MDC2 -DOPENSSL_NO_SEED -DOPENSSL_NO_WHIRLPOOL
+  -DOPENSSL_NO_IDEA -DOPENSSL_NO_MDC2 -DOPENSSL_NO_SEED -DOPENSSL_NO_WHIRLPOOL \
+  -DOPENSSL_NO_RSAX -DOPENSSL_NO_RDRAND -DOPENSSL_NO_HW -DHAVE_OPENSSL_ENGINE_H \
+  -DHAVE_ENGINE_LOAD_BUILTIN_ENGINES
 CRYPTO_COMMON_CFLAGS += -Wno-typedef-redefinition -Wno-sign-compare\
   -Wno-incompatible-pointer-types-discards-qualifiers
 CRYPTO_CSOURCES := \
@@ -114,7 +116,27 @@ CRYPTO_CSOURCES := \
   x509v3/v3_pcons.c x509v3/v3_pku.c x509v3/v3_pmaps.c x509v3/v3_prn.c \
   x509v3/v3_purp.c x509v3/v3_skey.c x509v3/v3_sxnet.c x509v3/v3_utl.c \
   x509v3/v3err.c
-CRYPTO_LOCAL_SRC_FILES := $(addprefix ../../openssl/crypto/,$(CRYPTO_CSOURCES))
+
+GOST_SRC := \
+   ccgost/gost2001.c \
+   ccgost/gost2001_keyx.c \
+   ccgost/gost89.c \
+   ccgost/gost94_keyx.c \
+   ccgost/gost_ameth.c \
+   ccgost/gost_asn1.c \
+   ccgost/gost_crypt.c \
+   ccgost/gost_ctl.c \
+   ccgost/gost_eng.c \
+   ccgost/gosthash.c \
+   ccgost/gost_keywrap.c \
+   ccgost/gost_md.c \
+   ccgost/gost_params.c \
+   ccgost/gost_pmeth.c \
+   ccgost/gost_sign.c \
+   ccgost/e_gost_err.c
+
+CRYPTO_LOCAL_SRC_FILES := $(addprefix ../../openssl/crypto/,$(CRYPTO_CSOURCES)) \
+						  $(addprefix ../../openssl/engines/,$(GOST_SRC))
 CRYPTO_LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../openssl \
                     $(LOCAL_PATH)/../../openssl/include \
                     $(LOCAL_PATH)/../../openssl/ssl \

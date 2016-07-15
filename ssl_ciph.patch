@@ -1,0 +1,14 @@
+--- openssl/ssl/ssl_ciph.c	2016-07-15 19:11:52.000000000 +0300
++++ openssl/ssl/ssl_ciph.c	2016-07-15 19:03:57.000000000 +0300
+@@ -747,6 +747,11 @@
+     if (!get_optional_pkey_id("gost2001")) {
+         *auth |= SSL_aGOST01;
+     }
++    ssl_mac_pkey_id[SSL_MD_GOST89MAC_IDX] = get_optional_pkey_id("gost-mac");
++    if (ssl_mac_pkey_id[SSL_MD_GOST89MAC_IDX]) {
++        ssl_mac_secret_size[SSL_MD_GOST89MAC_IDX] = 32;
++    }
++
+     /*
+      * Disable GOST key exchange if no GOST signature algs are available *
+      */

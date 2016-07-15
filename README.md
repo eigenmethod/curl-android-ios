@@ -1,11 +1,12 @@
-curl-android-ios
+curl-android-ios + openssl with GOST built-in
 ================
-The goal of this project is to provide a pre-compiled version of libcurl to be
+The goal of this project is to provide a pre-compiled version of libcurl with openssl to be
 used in Android and iOS.
 
 It uses cURL from the upstream repository and it's updated frequently.
 
-For Android, it also uses OpenSSL from its upstream repository.
+For Android, it also uses OpenSSL from its upstream repository. GOST is enabled for android and doesn't require any openssl.cnf changes.
+
 
 If you want to build the library, scripts are provided for both platforms.
 Test projects are also provided for both iOS and Android.
@@ -22,6 +23,7 @@ xcode-select --install
 ## Building for Android:
 * Download Android NDK
 ```
+patch -p0 <ssl_ciph.patch
 cd curl-android-ios/curl-compile-scripts
 export NDK_ROOT=PATH_WHERE_NDK_IS
 ./build_Android.sh
