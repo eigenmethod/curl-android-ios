@@ -15,6 +15,7 @@ SSL_CSOURCES := \
   t1_srvr.c tls_srp.c
 SSL_LOCAL_SRC_FILES := $(addprefix ../../openssl/ssl/,$(SSL_CSOURCES))
 SSL_LOCAL_C_INCLUDES := \
+  $(LOCAL_PATH)/../.. \
   $(LOCAL_PATH)/../../openssl/include \
   $(LOCAL_PATH)/../../openssl \
   $(LOCAL_PATH)/../../openssl/crypto \
