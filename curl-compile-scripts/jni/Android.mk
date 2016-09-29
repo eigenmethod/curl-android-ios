@@ -1,7 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 
 #zlib
-include $(LOCAL_PATH)/zlib.mk
+include $(LOCAL_PATH)/z.mk
 
 #SSL
 include $(LOCAL_PATH)/ssl.mk
